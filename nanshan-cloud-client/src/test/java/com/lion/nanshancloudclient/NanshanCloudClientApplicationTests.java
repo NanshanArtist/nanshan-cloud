@@ -1,10 +1,10 @@
-package com.lion.nanshancloudservicedef;
+package com.lion.nanshancloudclient;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NanshanCloudServiceDefApplicationTests {
+class NanshanCloudClientApplicationTests {
 
     @Test
     void contextLoads() {

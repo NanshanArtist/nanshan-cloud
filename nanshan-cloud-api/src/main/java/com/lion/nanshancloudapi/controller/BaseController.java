@@ -1,9 +1,13 @@
 package com.lion.nanshancloudapi.controller;
 
+import com.lion.nanshancloudservicedef.commom.constants.FrameConstant;
+import com.lion.nanshancloudservicedef.service.LambdaService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DateFormat;
@@ -22,13 +26,14 @@ public class BaseController {
     @Value("${app_ticket}")
     private String appTicket;
 
+    @Autowired
+    private LambdaService lambdaService;
+
     @RequestMapping("/show")
     @ResponseBody
-    public String showMsg() throws Exception {
-        if (true) {
-            throw new RuntimeException("some exception");
-        }
-        return "error";
+    public String showMsg() {
+        lambdaService.optionalUse();
+        return FrameConstant.START_SUCESS;
     }
 
     /**
@@ -38,9 +43,8 @@ public class BaseController {
      */
     @RequestMapping("/hello")
     @ResponseBody
-    public String hello() {
+    public String hello(@RequestParam String name) {
         String date = DateFormat.getDateInstance().format(new Date());
-        log.info("test log");
-        return date;
+        return "Today is " + date;
     }
 }
